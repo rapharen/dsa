@@ -20,11 +20,26 @@ Explanation
 
 def isAlphabeticPalindrome(code):
     # v1: O(n), O(n)
-    new_code = []
-    for c in code:
-        if c.isalpha():
-            new_code.append(c.lower())
-    return new_code == new_code[::-1]
+    # v2:
+    # new_code = []
+    # for c in code:
+    #     if c.isalpha():
+    #         new_code.append(c.lower())
+    # return new_code == new_code[::-1]
+
+    left, right = 0, len(code) - 1
+    while left < right:
+        if not code[left].isalpha():
+            left += 1
+            continue
+        if not code[right].isalpha():
+            right -= 1
+            continue
+        if code[left].lower() != code[right].lower():
+            return False
+        left += 1
+        right -= 1
+    return True
 
 
 if __name__ == '__main__':
