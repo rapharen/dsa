@@ -7,16 +7,17 @@ https://www.hackerrank.com/contests/software-engineer-prep-kit/challenges/count-
 
 
 def countResponseTimeRegressions(responseTimes):
-    times = []
+    # v1: O(n^2)
+    # v2: O(n)
+    if not responseTimes:
+        return 0
     count = 0
-    for i, response in enumerate(responseTimes):
-        if i == 0:
-            times.append(response)
-            continue
-        avg = sum(times) / len(times)
-        if response > avg:
+    current_sum = responseTimes[0] # first element
+    for i in range(1, len(responseTimes)):
+        avg = current_sum / i
+        if responseTimes[i] > avg:
             count += 1
-        times.append(response)
+        current_sum += responseTimes[i]
     return count
 
 
